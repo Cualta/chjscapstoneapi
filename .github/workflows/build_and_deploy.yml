@@ -36,7 +36,7 @@ jobs:
           echo "APP_PORT=8403" >> $GITHUB_ENV
       - name: Prepare APP_DOMAIN
         run: |
-          echo "APP_DOMAIN=$( echo ${{ env.BRANCH_NAME }}).api.codevteacher.com" >> $GITHUB_ENV
+          echo "APP_DOMAIN=$( echo ${{ env.BRANCH_NAME }}).api.chjscapstone.com" >> $GITHUB_ENV
 
       - name: print environments
         run: |
