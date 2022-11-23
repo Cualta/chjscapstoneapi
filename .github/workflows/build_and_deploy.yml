@@ -58,8 +58,8 @@ jobs:
           context: .
           push: true
           tags: |
-            jafarijason/${{env.REPO_NAME}}_${{ env.BRANCH_NAME}}:latest
-            jafarijason/${{env.REPO_NAME}}_${{ env.BRANCH_NAME}}:${{env.APP_VERSION}}
+            clamiher/${{env.REPO_NAME}}_${{ env.BRANCH_NAME}}:latest
+            clamiher/${{env.REPO_NAME}}_${{ env.BRANCH_NAME}}:${{env.APP_VERSION}}
 
       # - name: Copy config file into server
       #   uses: appleboy/scp-action@master
