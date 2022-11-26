@@ -1,0 +1,44 @@
+version: '3.8'
+
+services:
+  chjscapstoneapi_prd:
+    image: clamiher/chjscapstoneapi_${BRANCH_NAME}:${APP_VERSION}
+    networks:
+      - traefik-public
+    env_file:
+      - .env
+    deploy:
+      mode: replicated
+      restart_policy:
+        condition: any
+      placement:
+        constraints:
+          # - node.role == worker
+          - node.role == manager
+      replicas: 6
+      labels:
+        - traefik.enable=true
+        - traefik.docker.network=traefik-public
+        - traefik.constraint-label=traefik-public
+        - traefik.http.routers.chjscapstoneapi_prd-http.rule=Host(`${APP_DOMAIN?Variable not set}`)
+        - traefik.http.routers.chjscapstoneapi_prd-http.entrypoints=http
+        - traefik.http.routers.chjscapstoneapi_prd-http.middlewares=https-redirect
+        - traefik.http.routers.chjscapstoneapi_prd-https.rule=Host(`${APP_DOMAIN?Variable not set}`)
+        - traefik.http.routers.chjscapstoneapi_prd-https.entrypoints=https
+        - traefik.http.routers.chjscapstoneapi_prd-https.tls=true
+        - traefik.http.routers.chjscapstoneapi_prd-https.tls.certresolver=le
+        - traefik.http.services.chjscapstoneapi_prd.loadbalancer.server.port=${APP_PORT}
+      update_config:
+        parallelism: 3
+        order: start-first
+        failure_action: rollback
+        delay: 5s
+      rollback_config:
+        parallelism: 0
+        order: stop-first
+    # healthcheck:
+    #   test: ["CMD", "./healthCheck.sh", "${APP_PORT}"]
+
+networks:
+  traefik-public:
+    external: true
