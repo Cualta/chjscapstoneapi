@@ -1,11 +1,13 @@
 import { Global, Module } from '@nestjs/common';
+import constantInitiate, { JWT_SECRET_KEY } from 'src/constantInitiate';
 
 import { AuthService } from './auth.service';
 import { JwtModule } from '@nestjs/jwt';
+import { JwtStrategy } from './jwt.strategy';
 import { LocalStrategy } from './local.strategy';
 import { PassportModule } from '@nestjs/passport';
-import { UsersModule } from 'src/users/users.module';
 
+constantInitiate();
 @Global()
 @Module({
   imports: [
@@ -15,7 +17,7 @@ import { UsersModule } from 'src/users/users.module';
       signOptions: { expiresIn: '7d' },
     }),
   ],
-  providers: [AuthService, LocalStrategy],
+  providers: [AuthService, LocalStrategy, JwtStrategy],
   exports: [AuthService],
 })
 export class AuthModule {}

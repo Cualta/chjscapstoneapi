@@ -34,6 +34,7 @@ jobs:
         if: ${{env.BRANCH_NAME == 'test'}}
         run: |
           echo "APP_PORT=8403" >> $GITHUB_ENV
+
       - name: Prepare APP_DOMAIN
         run: |
           echo "APP_DOMAIN=$( echo ${{ env.BRANCH_NAME }}).api.chjscapstone.com" >> $GITHUB_ENV
@@ -70,6 +71,7 @@ jobs:
           port: 22
           username: root
           key: ${{ secrets.SERVER_SSH_KEY }}
+
       - name: connect to server and deploy
         uses: appleboy/ssh-action@master
         with:

@@ -3,6 +3,7 @@ import * as _ from 'lodash';
 import { Injectable } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import { UsersService } from 'src/users/users.service';
+import { passwordVerify } from 'src/commons/functions/passwordVerify';
 
 @Injectable()
 export class AuthService {
@@ -13,10 +14,13 @@ export class AuthService {
 
   async validateUser(username, pass) {
     const user = await this.usersService.findOne(username);
-    if (!_.isEmpty(user) && user.password === pass) {
-      const copyUser = _.cloneDeep(user);
-      delete copyUser.password;
-      return copyUser;
+    if (!_.isEmpty(user)) {
+      const verifyPassword = await passwordVerify(pass, user.password);
+      if (verifyPassword) {
+        const copyUser = _.cloneDeep(user);
+        delete copyUser.password;
+        return copyUser;
+      }
     }
     return null;
   }
@@ -30,5 +34,7 @@ export class AuthService {
     return {
       access_token: this.jwtService.sign(payload),
     };
+
+    // return user;
   }
 }

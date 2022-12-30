@@ -1,5 +1,10 @@
 version: '3.8'
 
+secrets:
+  chjscapstoneapi_test_env_1:
+    external: true
+
+
 services:
   chjscapstoneapi_test:
     image: clamiher/chjscapstoneapi_${BRANCH_NAME}:${APP_VERSION}
@@ -7,6 +12,10 @@ services:
       - traefik-public
     env_file:
       - .env
+      secrets:
+      - chjscapstoneapi_test_env_1
+    environment:
+      - CUSTOM_ENV=/run/secrets/chjscapstoneapi_test_env_1
     deploy:
       mode: replicated
       restart_policy:

@@ -5,19 +5,16 @@ module.exports = {
     sourceType: 'module',
   },
   plugins: ['@typescript-eslint/eslint-plugin'],
-  extends: [
-    'plugin:@typescript-eslint/recommended',
-    './.eslintrc_default.js'
-  ],
+  extends: ['plugin:@typescript-eslint/recommended', './.eslintrc_default.js'],
   root: true,
   env: {
     node: true,
     jest: true,
   },
   rules: {
-    "no-unused-vars": "off",
-    "no-var-requires": "off",
-    "@typescript-eslint/no-var-requires": "off",
+    'no-unused-vars': 'off',
+    'no-var-requires': 'off',
+    '@typescript-eslint/no-var-requires': 'off',
   },
   overrides: [
     {
@@ -39,9 +36,9 @@ module.exports = {
           4,
           {
             SwitchCase: 1,
-            "ArrayExpression": 1,
-            "ObjectExpression": 1
-          }
+            ArrayExpression: 1,
+            ObjectExpression: 1,
+          },
         ],
       },
     },
@@ -60,8 +57,7 @@ module.exports = {
         '@typescript-eslint/no-unused-vars': 'off',
         '@typescript-eslint/ban-types': 'off',
         '@typescript-eslint/no-empty-function': 'off',
-
       },
-    }
-  ]
+    },
+  ],
 };
