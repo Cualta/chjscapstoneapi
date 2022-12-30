@@ -10,14 +10,14 @@ import { PassportModule } from '@nestjs/passport';
 constantInitiate();
 @Global()
 @Module({
-  imports: [
-    PassportModule,
-    JwtModule.register({
-      secret: JWT_SECRET_KEY,
-      signOptions: { expiresIn: '7d' },
-    }),
-  ],
-  providers: [AuthService, LocalStrategy, JwtStrategy],
-  exports: [AuthService],
+    imports: [
+        PassportModule,
+        JwtModule.register({
+            secret: JWT_SECRET_KEY,
+            signOptions: { expiresIn: '7d' },
+        }),
+    ],
+    providers: [AuthService, LocalStrategy, JwtStrategy],
+    exports: [AuthService],
 })
 export class AuthModule {}

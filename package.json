@@ -1,10 +1,10 @@
 {
-    "name": "codevteacher.com",
-    "version": "1.0.61",
-    "description": "",
-    "author": "Jason Jafari",
+    "name": "chjscapstone.com",
+    "version": "0.0.12",
+    "description": "claudia hernandez",
+    "author": "",
     "private": true,
-    "license": "MIT",
+    "license": "IMT",
     "scripts": {
         "audit": "better-npm-audit audit -l moderate 1002401",
         "increase-version": "npm --force --no-git-tag-version version patch && git add package.json package-lock.json",

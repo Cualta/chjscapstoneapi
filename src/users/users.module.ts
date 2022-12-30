@@ -6,8 +6,8 @@ import { UsersService } from './users.service';
 
 @Global()
 @Module({
-  providers: [UsersService, LocalStrategy],
-  exports: [UsersService],
-  controllers: [UsersController],
+    providers: [UsersService, LocalStrategy],
+    exports: [UsersService],
+    controllers: [UsersController],
 })
 export class UsersModule {}
